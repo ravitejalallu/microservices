@@ -1,11 +1,13 @@
 package com.microservices.demo.twitter.to.kafka.service.runner.impl;
 
-import com.microservices.demo.twitter.to.kafka.service.Configuration.SearchContextConfiguration;
+
+import com.microservices.demo.TwitterToKafkaSearchConfigData;
 import com.microservices.demo.twitter.to.kafka.service.exception.TwitterToKafkaException;
 import com.microservices.demo.twitter.to.kafka.service.listener.TwitterKafkaStatusListener;
 import com.microservices.demo.twitter.to.kafka.service.runner.StreamRunner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import twitter4j.Status;
 import twitter4j.TwitterException;
@@ -21,9 +23,10 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 @Slf4j
 @ConditionalOnProperty(name = "twitter-to-kafka-service.enable-mock-tweets",havingValue = "true")
+@ComponentScan(basePackages = "com.microservices.demo")
 public class MockTwitterKafkaStreamRunnerImpl implements StreamRunner {
 
-    private final SearchContextConfiguration searchContextConfiguration;
+    private final TwitterToKafkaSearchConfigData searchContextConfiguration ;
     private final TwitterKafkaStatusListener twitterKafkaStatusListener;
 
     private static final Random RANDOM = new Random();
@@ -59,9 +62,7 @@ public class MockTwitterKafkaStreamRunnerImpl implements StreamRunner {
 
     private  static final String TWITTER_STATUS_DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
 
-
-    public MockTwitterKafkaStreamRunnerImpl(SearchContextConfiguration searchContextConfiguration,
-                                            TwitterKafkaStatusListener twitterKafkaStatusListener) {
+    public MockTwitterKafkaStreamRunnerImpl(TwitterToKafkaSearchConfigData searchContextConfiguration, TwitterKafkaStatusListener twitterKafkaStatusListener) {
         this.searchContextConfiguration = searchContextConfiguration;
         this.twitterKafkaStatusListener = twitterKafkaStatusListener;
     }
