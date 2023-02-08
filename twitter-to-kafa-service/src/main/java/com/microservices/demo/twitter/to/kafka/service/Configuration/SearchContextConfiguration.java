@@ -6,11 +6,15 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+@Data
 @Configuration
 @ConfigurationProperties(prefix = "twitter-to-kafka-service")
-@Data
 public class SearchContextConfiguration {
 
     private List<String>twitterKeywords;
     private String welcomeMessage;
+    private Boolean enableMockTweets;
+    private Integer mockMinTweetLength;
+    private Integer mockMaxTweetLength;
+    private Long mockSleepMs;
 }

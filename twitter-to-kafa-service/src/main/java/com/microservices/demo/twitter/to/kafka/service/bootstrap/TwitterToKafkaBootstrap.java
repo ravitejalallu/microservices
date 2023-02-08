@@ -1,27 +1,28 @@
 package com.microservices.demo.twitter.to.kafka.service.bootstrap;
 
-import com.microservices.demo.twitter.to.kafka.service.Configuration.SearchContextConfiguration;
+import com.microservices.demo.twitter.to.kafka.service.runner.StreamRunner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import twitter4j.TwitterException;
 
 @Component
 @Slf4j
 public class TwitterToKafkaBootstrap implements CommandLineRunner {
 
-    private  final SearchContextConfiguration contextConfiguration;
+    private  final StreamRunner streamRunner;
 
-    public TwitterToKafkaBootstrap(SearchContextConfiguration contextConfiguration) {
-        this.contextConfiguration = contextConfiguration;
+    public TwitterToKafkaBootstrap(StreamRunner streamRunner) {
+        this.streamRunner = streamRunner;
     }
+
 
     @Override
     public void run(String... args) throws Exception {
-        log.info(contextConfiguration.getWelcomeMessage());
         loadDate();
     }
 
-    private void loadDate() {
-        contextConfiguration.getTwitterKeywords().forEach(log::info);
+    private void loadDate() throws TwitterException {
+        streamRunner.start();
     }
 }
