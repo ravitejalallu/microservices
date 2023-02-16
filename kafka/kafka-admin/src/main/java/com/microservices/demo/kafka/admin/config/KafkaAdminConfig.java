@@ -25,9 +25,4 @@ public class KafkaAdminConfig {
         return AdminClient.create(Map.of(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG,
                 kafkaConfigData.getBootstrapServers()));
     }
-
-    @Bean
-    public RetryTemplate retryTemplate(){
-        return RetryTemplate.builder().build();
-    }
 }

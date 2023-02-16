@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://C:/Dev/gmDevelopment/microservices/config-server-repository
+          clone-on-start: true
+    fail-fast: true
